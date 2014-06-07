@@ -1,4 +1,4 @@
 [Project]
-Name=cloudos-livecd
+Name=installer-livecd
 Manager=KDevCMakeManager
 VersionControl=kdevgit

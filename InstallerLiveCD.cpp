@@ -157,7 +157,7 @@ namespace system {
       return false;
     }
     
-    c_tar_file = "/tmp/cloudos-livecd-"+version+".tar.gz";
+    c_tar_file = "/tmp/installer-livecd-"+version+".tar.gz";
     
     if( fs::exists(c_tar_file) ) {
       boost::system::error_code ec;

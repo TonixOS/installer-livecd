@@ -1,4 +1,4 @@
-project(cloudos-livecd)
+project(installer-livecd)
 cmake_minimum_required(VERSION 2.8)
 set( CMAKE_VERBOSE_MAKEFILE on )
 #set( CMAKE_CXX_FLAGS "-fsanitize=address -std=c++11" )
@@ -17,9 +17,9 @@ add_definitions(-DBOOST_ALL_DYN_LINK)
 
 include_directories ("${PROJECT_SOURCE_DIR}")
 
-add_executable(cloudos-livecd main.cpp InstallerLiveCD.cpp)
+add_executable(installer-livecd main.cpp InstallerLiveCD.cpp)
 
-target_link_libraries(cloudos-livecd cloudos
+target_link_libraries(installer-livecd cloudos
                                      boost_filesystem
 				     boost_system
 				     boost_log
@@ -31,4 +31,4 @@ target_link_libraries(cloudos-livecd cloudos
 				     pthread
 		     )
 
-install(TARGETS cloudos-livecd RUNTIME DESTINATION bin)
+install(TARGETS installer-livecd RUNTIME DESTINATION bin)
