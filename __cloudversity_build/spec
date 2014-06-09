@@ -1,0 +1,80 @@
+#
+# Copyright (c) 2013,2014 Cloudversity Project, Bad Homburg, Germany.
+#
+# This file is licensed under the terms of the Attribution-ShareAlike 3.0 Unported
+# see http://creativecommons.org/licenses/by-sa/3.0/legalcode for details
+
+
+Name:           installer-livecd
+Summary:        Our livecd installer
+Version:        0.98
+Release:        1
+License:        GPLv2
+Url:            http://projects.cloudversity.org/projects/%{name}
+Group:          System/Essentials
+Source:         %{name}-%{version}.tar.xz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+
+# rpm will only detect libyui, but we need libyui-ncurses too
+Requires:       libyui-ncurses
+Requires:       cpio
+
+BuildRequires:  cmake
+BuildRequires:  libyui-dev
+BuildRequires:  libyui-ncurses-dev
+BuildRequires:  parted-dev
+BuildRequires:  libboost-dev
+BuildRequires:  libprotobuf-dev
+BuildRequires:  libcloudos-dev
+
+
+# ====================================== #
+#                Binary                  #
+# ====================================== #
+%description
+With this installer, you are able to create a live cd from our system...
+
+
+%prep
+%setup -q
+
+# set our current version
+#find . -name '*.cpp' -exec sed -i 's/__CLOUDOS__VERSION__/%{version}/g' {} \;
+
+%build
+#
+#  Build the installer software
+#
+%{export_wanted_compiler}
+
+mkdir build
+cd build/
+cmake -DCMAKE_INSTALL_PREFIX=/usr ../
+make %{?_smp_mflags}
+
+%install
+# cleanup
+rm -rf ${RPM_BUILD_ROOT}
+
+cd build/
+%make_install
+
+# do some common stuff
+/usr/share/cloudos/rpm/post-install_helper.sh %{buildroot} %{_sourcedir}
+
+#
+# create our basesystem-rpms.tar file
+#
+#bash %{_sourcedir}/collect_installer_packages.sh ${RPM_BUILD_ROOT}
+
+%post
+systemctl enable %{name}.service
+
+%files
+%defattr(-,root,root)
+%config(noreplace) /etc/cloudversity/installer/livecd/settings/
+/usr/bin/installer-livecd
+
+%changelog
+
+# vim: set ft=spec:
