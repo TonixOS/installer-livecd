@@ -72,40 +72,40 @@ namespace system {
     fs::remove_all( getRootDirAsPath() / "usr/share/vim/vim73/spell/he.vim" );
     fs::remove_all( getRootDirAsPath() / "usr/share/vim/vim73/spell/yi.vim" );
     
-    std::vector<std::string> to_be_killed;
+    std::vector<std::string> to_be_removed;
     
     // $ROOT_DIR/usr/share/vim/vim73/lang/{af,ca,cs,de,eo,es,fi,fr,ga,it,ja,ko}*
-    to_be_killed = boost::assign::list_of("af")("ca")("cs")("de")("eo")("es")("fi")("fr")("ga")("it")("ja")("ko").convert_to_container<std::vector<std::string> >();
-    removeFiles( std::move(to_be_killed), getRootDirAsPath() / "usr/share/vim/vim73/lang", LOOKUP_BY_FULLMATCH );
+    to_be_removed = boost::assign::list_of("af")("ca")("cs")("de")("eo")("es")("fi")("fr")("ga")("it")("ja")("ko").convert_to_container<std::vector<std::string> >();
+    removeFiles( std::move(to_be_removed), getRootDirAsPath() / "usr/share/vim/vim73/lang", LOOKUP_BY_FULLMATCH );
     
     // $ROOT_DIR/usr/share/locale/e{l,o,s,t,u}*
-    to_be_killed = boost::assign::list_of("el")("eo")("es")("et")("eu").convert_to_container<std::vector<std::string> >();
-    removeFiles( std::move(to_be_killed), getRootDirAsPath() / "usr/share/locale", LOOKUP_BY_FULLMATCH );
+    to_be_removed = boost::assign::list_of("el")("eo")("es")("et")("eu").convert_to_container<std::vector<std::string> >();
+    removeFiles( std::move(to_be_removed), getRootDirAsPath() / "usr/share/locale", LOOKUP_BY_FULLMATCH );
     
     // $ROOT_DIR/usr/share/locale/[a-cf-z]*
-    to_be_killed = std::vector<std::string>();
-    to_be_killed.push_back("^([a-cf-z].*)");
-    removeFiles( std::move(to_be_killed), getRootDirAsPath() / "usr/share/locale", LOOKUP_BY_REGEX );
+    to_be_removed = std::vector<std::string>();
+    to_be_removed.push_back("^([a-cf-z].*)");
+    removeFiles( std::move(to_be_removed), getRootDirAsPath() / "usr/share/locale", LOOKUP_BY_REGEX );
     
     // $ROOT_DIR/usr/share/vim/vim73/lang/menu_[a-df-z]*
-    to_be_killed = std::vector<std::string>();
-    to_be_killed.push_back("^(menu_[a-df-z].*)");
-    removeFiles( std::move(to_be_killed), getRootDirAsPath() / "usr/share/locale", LOOKUP_BY_REGEX );
+    to_be_removed = std::vector<std::string>();
+    to_be_removed.push_back("^(menu_[a-df-z].*)");
+    removeFiles( std::move(to_be_removed), getRootDirAsPath() / "usr/share/locale", LOOKUP_BY_REGEX );
     
     // $ROOT_DIR/usr/lib/*.a
-    to_be_killed = std::vector<std::string>();
-    to_be_killed.push_back(".a");
-    removeFiles( std::move(to_be_killed), getRootDirAsPath() / "usr/lib", LOOKUP_BY_ENDSWITH );
+    to_be_removed = std::vector<std::string>();
+    to_be_removed.push_back(".a");
+    removeFiles( std::move(to_be_removed), getRootDirAsPath() / "usr/lib", LOOKUP_BY_ENDSWITH );
     
     // $ROOT_DIR/usr/share/vim/vim73/doc/*.txt
-    to_be_killed = std::vector<std::string>();
-    to_be_killed.push_back(".txt");
-    removeFiles( std::move(to_be_killed), getRootDirAsPath() / "usr/lib", LOOKUP_BY_ENDSWITH );
+    to_be_removed = std::vector<std::string>();
+    to_be_removed.push_back(".txt");
+    removeFiles( std::move(to_be_removed), getRootDirAsPath() / "usr/lib", LOOKUP_BY_ENDSWITH );
     
     // $ROOT_DIR/var/cache/zypper/RPMS/*.rpm
-    to_be_killed = std::vector<std::string>();
-    to_be_killed.push_back(".rpm");
-    removeFiles( std::move(to_be_killed), getRootDirAsPath() / "var/cache/zypper/RPMS", LOOKUP_BY_ENDSWITH );
+    to_be_removed = std::vector<std::string>();
+    to_be_removed.push_back(".rpm");
+    removeFiles( std::move(to_be_removed), getRootDirAsPath() / "var/cache/zypper/RPMS", LOOKUP_BY_ENDSWITH );
     
     return true;
   }
